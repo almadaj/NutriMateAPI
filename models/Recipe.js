@@ -1,16 +1,15 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
 
-module.exports = (sequelize, DataTypes) = {
-
-  const Recipe: sequelize.define("recipes", {
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    calories: DataTypes.INTEGER,
-    protein: DataTypes.INTEGER,
-    carbos: DataTypes.INTEGER,
-    fat: DataTypes.INTEGER,
-    timePrepare: DataTypes.INTEGER,
+const Recipe = sequelize.define("recipes", {
+  name: DataTypes.STRING,
+  description: DataTypes.STRING,
+  calories: DataTypes.INTEGER,
+  proteins: DataTypes.INTEGER,
+  carbos: DataTypes.INTEGER,
+  fat: DataTypes.INTEGER,
+  timePrepare: DataTypes.INTEGER,
+  // urlPhoto: DataTypes.STRING,
 });
-  return Recipe
-}
+
+module.exports = Recipe;
