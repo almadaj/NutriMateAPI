@@ -19,6 +19,10 @@ module.exports = {
     const recipes = await Recipe.findAll();
     return res.json(recipes);
   },
+  async getRecipe(req, res) {
+    const recipe = await Recipe.findOne({ where: { id: req.params.id} });
+    return res.json(recipe);
+  },
   async editRecipe(req, res) {
     const { name, description, calories, proteins, carbos, fat, timePrepare } =
       req.body;

@@ -17,6 +17,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      picture: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       calories: {
         type: Sequelize.INTEGER,
         allowNull: false,
