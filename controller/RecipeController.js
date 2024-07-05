@@ -20,21 +20,21 @@ module.exports = {
     return res.json(recipes);
   },
   async getRecipe(req, res) {
-    const recipe = await Recipe.findOne({ where: { id: req.params.id} });
+    const recipe = await Recipe.findOne({ where: { id: req.params.id } });
     return res.json(recipe);
   },
   async editRecipe(req, res) {
     const { name, description, calories, proteins, carbos, fat, timePrepare } =
       req.body;
     await Planet.update(
-      { nname, description, calories, proteins, carbos, fat, timePrepare },
+      { name, description, calories, proteins, carbos, fat, timePrepare },
       {
         where: {
           id: req.params.id,
         },
       }
     );
-    return res.send("Planet update with sucess");
+    return res.send("Recipe updated with sucess");
   },
   async deleteRecipe(req, res) {
     await Recipe.destroy({
