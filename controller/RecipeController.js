@@ -26,7 +26,7 @@ module.exports = {
   async editRecipe(req, res) {
     const { name, description, calories, proteins, carbos, fat, timePrepare } =
       req.body;
-    await Planet.update(
+    await Recipe.update(
       { name, description, calories, proteins, carbos, fat, timePrepare },
       {
         where: {
