@@ -7,6 +7,8 @@ const Meal = sequelize.define("Meal", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    unique: true,
+    allowNull: false,
   },
   icon: {
     type: DataTypes.STRING,
