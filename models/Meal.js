@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
-const Recipe = require("./recipe");
+const Recipe = require("./Recipe");
 const User = require("./User");
 
 const Meal = sequelize.define("Meal", {
@@ -16,7 +16,8 @@ const Meal = sequelize.define("Meal", {
   },
 });
 
-Meal.belongsTo(Recipe, { foreignKey: "recipeId" });
-Meal.belongsTo(User, { foreignKey: "userId" });
-
+Meal.associate = (models) => {
+  Meal.belongsTo(models.User, { foreignKey: "userId" });
+  Meal.belongsTo(Recipe, { foreignKey: "recipeId" });
+};
 module.exports = Meal;

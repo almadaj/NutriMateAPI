@@ -29,19 +29,29 @@ module.exports = {
     return res.send("User updated with sucess");
   },
   async getUser(req, res) {
-    const user = await User.findByPk(req.params.id);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+    try {
+      const user = await User.findByPk(req.params.id);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      } else {
+        return res.json(user);
+      }
+    } catch {
+      res.status(500).json({ error: "An error occurred" });
     }
-    return res.json(user);
   },
   async deleteUser(req, res) {
-    const user = await User.findByPk(req.params.id);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+    try {
+      const user = await User.findByPk(req.params.id);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      } else {
+        await user.destroy();
+        return res.send("User deleted with success");
+      }
+    } catch {
+      res.status(500).json({ error: "An error occurred" });
     }
-    await user.destroy();
-    return res.send("User deleted with success");
   },
   async listUsers(req, res) {
     const users = await User.findAll();

@@ -12,10 +12,10 @@ routes.put("/recipes/:id", RecipeController.editRecipe);
 routes.delete("/recipes/:id", RecipeController.deleteRecipe);
 
 //Users
-routes.post("/register", userController.registerUser);
-routes.put("/edit/:id", userController.editUser);
-routes.get("/:id", userController.getUser);
-routes.delete("/delete/:id", userController.deleteUser);
-routes.get("/", userController.listUsers);
+routes.post("/register", UserController.registerUser);
+routes.put("/edit/:id", UserController.editUser);
+routes.get("/:id", UserController.getUser);
+routes.delete("/delete/:id", UserController.deleteUser);
+routes.get("/", UserController.listUsers);
 
 module.exports = routes;
