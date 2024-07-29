@@ -53,5 +53,3 @@ module.exports = {
     await queryInterface.dropTable("users");
   },
 };
-
-User.hasMany(Meal, { foreignKey: "userId" });
