@@ -7,7 +7,7 @@ module.exports = {
       req.body;
 
     try {
-      const salt = bcrypt.genSaltSync(10);
+      const salt = 2;
       const hashedPassword = bcrypt.hashSync(password, salt);
 
       const user = await User.create({
@@ -20,8 +20,10 @@ module.exports = {
         password: hashedPassword,
       });
 
-      return res.json(user);
+      console.log("User created successfully:", user);
+      return res.status(201).json(user);
     } catch (error) {
+      console.error("Error registering user:", error);
       return res
         .status(500)
         .json({ error: "An error occurred while creating the user" });
@@ -32,11 +34,23 @@ module.exports = {
     const { firstName, lastName, profilePhoto, phone, birth, email, password } =
       req.body;
 
-    try {
-      const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+    console.log(
+      firstName,
+      lastName,
+      profilePhoto,
+      phone,
+      birth,
+      email,
+      password
+    );
 
-      await User.update(
+    try {
+      if (password) {
+        const salt = 2;
+        const password = bcrypt.hashSync(password, salt);
+      }
+
+      const [updated] = await User.update(
         {
           firstName,
           lastName,
@@ -44,17 +58,24 @@ module.exports = {
           phone,
           birth,
           email,
-          password: hashedPassword,
+          password: password,
         },
         {
-          where: {
-            id: req.params.id,
-          },
+          where: { id: req.params.id },
         }
       );
 
-      return res.send("User updated with success");
+      if (updated) {
+        const updatedUser = await User.findByPk(req.params.id);
+        console.log("User updated successfully:", updatedUser);
+        return res.json({
+          message: "User updated successfully",
+          user: updatedUser,
+        });
+      }
+      throw new Error("User not found");
     } catch (error) {
+      console.error("Error updating user:", error);
       return res
         .status(500)
         .json({ error: "An error occurred while updating the user" });
@@ -70,6 +91,7 @@ module.exports = {
         return res.json(user);
       }
     } catch (error) {
+      console.error("Error fetching user:", error);
       return res.status(500).json({ error: "An error occurred" });
     }
   },
@@ -85,9 +107,32 @@ module.exports = {
         return res.json(user);
       }
     } catch (error) {
+      console.error("Error fetching user by email:", error);
       return res
         .status(500)
         .json({ error: "An error occurred while retrieving the user" });
+    }
+  },
+
+  async login(req, res) {
+    const { email, password } = req.body;
+    try {
+      const user = await User.findOne({ where: { email } });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        return res.json({ success: true, message: "Success", user });
+      } else {
+        return res
+          .status(400)
+          .json({ success: false, message: "Invalid password" });
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      return res.status(500).json({ message: "Server error" });
     }
   },
 
@@ -98,9 +143,11 @@ module.exports = {
         return res.status(404).json({ error: "User not found" });
       } else {
         await user.destroy();
-        return res.send("User deleted with success");
+        console.log("User deleted successfully:", user);
+        return res.json({ message: "User deleted successfully" });
       }
     } catch (error) {
+      console.error("Error deleting user:", error);
       return res.status(500).json({ error: "An error occurred" });
     }
   },
@@ -110,6 +157,7 @@ module.exports = {
       const users = await User.findAll();
       return res.json(users);
     } catch (error) {
+      console.error("Error fetching users:", error);
       return res
         .status(500)
         .json({ error: "An error occurred while retrieving users" });
