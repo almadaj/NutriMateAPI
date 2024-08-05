@@ -1,5 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
+const UserMeal = require('../models/UserMeal')
+const User = require('../models/User')
 
 const Recipe = sequelize.define("recipes", {
   name: DataTypes.STRING,
@@ -10,6 +12,10 @@ const Recipe = sequelize.define("recipes", {
   carbos: DataTypes.INTEGER,
   fat: DataTypes.INTEGER,
   timePrepare: DataTypes.INTEGER,
+}, {
+  timestamps: false // Disable createdAt and updatedAt
 });
+
+Recipe.belongsToMany(User, { through: UserMeal });
 
 module.exports = Recipe;

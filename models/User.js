@@ -1,5 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
+const Recipe = require('../models/Recipe')
+const UserMeal = require('../models/UserMeal')
 
 const User = sequelize.define("users", {
   firstName: DataTypes.STRING,
@@ -10,9 +12,7 @@ const User = sequelize.define("users", {
   email: DataTypes.INTEGER,
   password: DataTypes.INTEGER,
 });
-User.associate = (models) => {
-  User.hasMany(models.Meal, { foreignKey: "userId" });
-  return User;
-};
+
+User.belongsToMany(Recipe, { through: UserMeal});
 
 module.exports = User;
