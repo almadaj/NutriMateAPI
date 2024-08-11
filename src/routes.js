@@ -17,5 +17,6 @@ routes.patch("/user/:id", UserController.editUser);
 routes.get("/user/:id", UserController.getUser);
 routes.delete("/user/:id", UserController.deleteUser);
 routes.get("/users", UserController.listUsers);
+routes.post("/login", UserController.login);
 
 module.exports = routes;
