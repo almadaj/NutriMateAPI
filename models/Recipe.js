@@ -12,4 +12,7 @@ const Recipe = sequelize.define("recipes", {
   timePrepare: DataTypes.INTEGER,
 });
 
+Recipe.associate = (models) => {
+  Recipe.hasMany(models.Meal, { foreignKey: "recipeId", as: "meals" });
+};
 module.exports = Recipe;
