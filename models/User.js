@@ -12,8 +12,7 @@ const User = sequelize.define("users", {
   password: DataTypes.INTEGER,
 });
 User.associate = (models) => {
-  User.hasMany(models.Meal, { foreignKey: "userId" });
-  return User;
+  User.hasMany(models.Meal, { foreignKey: "userId", as: "meals" });
 };
 
 module.exports = User;
