@@ -8,7 +8,7 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "migrate": "npx sequelize-cli db:migrate",
-    "migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo:all",
     "seed:all": "npx sequelize db:seed:all"
   },
   "keywords": [],
