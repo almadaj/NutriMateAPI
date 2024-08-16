@@ -20,8 +20,7 @@ routes.delete("/user/:id", UserController.deleteUser);
 routes.get("/users", UserController.listUsers);
 routes.post("/login", UserController.login);
 
-//Meals
-routes.post("/meal", MealController.addMeal);
-routes.get("/meal", MealController.listMeal);
-routes.get("/meal/:id", MealController.listMealById);
+//UserMeals
+routes.get('/user/meals/:id', MealController.listMealByUser)
+
 module.exports = routes;

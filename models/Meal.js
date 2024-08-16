@@ -1,11 +1,5 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
-const Recipe = require("./Recipe");
-const User = require("./User");
-
-const Meal = sequelize.define(
-  "userMeals",
-  {
+module.exports =  (sequelize, DataTypes) => {
+  const Meal = sequelize.define("meals", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -16,33 +10,25 @@ const Meal = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    recipeId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "recipes",
-        key: "id",
-      },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     userId: {
       type: DataTypes.INTEGER,
       references: {
-        model: "users",
-        key: "id",
-      },
+        model: 'users',
+        key: 'id'
+      }
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-  },
-  {
-    timestamps: false,
+  }, {
+    timestamps: false // Disable createdAt and updatedAt
+  });
+
+  Meal.associate = ({ Recipe, User, MealRecipes }) => {
+    Meal.belongsToMany(Recipe, { through: MealRecipes });  
+    Meal.belongsTo(User, { foreignKey: 'userId' });
   }
-);
 
-Meal.associate = (models) => {
-  Meal.belongsTo(models.User, { foreignKey: "userId", as: "user" });
-  Meal.belongsTo(models.Recipe, { foreignKey: "recipeId", as: "recipe" });
-};
-
-module.exports = Meal;
+  return Meal;
+}

@@ -1,34 +1,26 @@
-const Meal = require("../models/Meal");
-const User = require("../models/User");
-const Recipe = require("../models/Recipe");
+const {User, Meal} = require("../models/index");
 
 module.exports = {
   async addMeal(req, res) {
-    const { icon, recipeId, userId, name } = req.body;
+    const { icon, userId, name } = req.body;
     const recipe = await Meal.create({
       icon,
-      recipeId,
-      userId,
       name,
+      userId,
     });
     return res.json(recipe);
   },
-  async listMeal(req, res) {
-    const meals = await Meal.findAll({
-      include: [
-        { model: User, as: "user" },
-        { model: Recipe, as: "recipe" },
-      ],
-    });
-    return res.json(meals);
+  async getMeal(req, res) {
+    const meal = await Meal.findOne({ where: { id: req.params.id } });
+    return res.json(meal);
   },
-  async listMealById(req, res) {
+  async listMealByUser(req, res) {
     const { id } = req.params;
-    const meal = await Meal.findByPk(id, {
-      include: [
-        { model: User, as: "user" },
-        { model: Recipe, as: "recipe" },
-      ],
+    const meal = await User.findAll({
+      where: {id: id},
+      include:  {
+        model: Meal
+      },
     });
     return res.json(meal);
   },
