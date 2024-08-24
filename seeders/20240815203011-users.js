@@ -1,4 +1,10 @@
+const bcrypt = require("bcryptjs");
 'use strict';
+
+function encryptPassword(password) {
+  const salt = 2;
+  return bcrypt.hashSync(password, salt);
+}
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -10,7 +16,7 @@ module.exports = {
         phone: 1234567890,
         birth: new Date(),
         email: 'johndoe@example.com',
-        password: 123456,
+        password: encryptPassword('123456'),
         createdAt: new Date(),
           updatedAt: new Date(),
       },
@@ -21,7 +27,7 @@ module.exports = {
         phone: 2345678901,
         birth: new Date(),
         email: 'janesmith@example.com',
-        password: 234567,
+        password: encryptPassword('234567'),
         createdAt: new Date(),
           updatedAt: new Date(),
       },
@@ -32,7 +38,7 @@ module.exports = {
         phone: 3456789012,
         birth: new Date(),
         email: 'mikejohnson@example.com',
-        password: 345678,
+        password: encryptPassword('345678'),
         createdAt: new Date(),
           updatedAt: new Date(),
       },
@@ -43,7 +49,7 @@ module.exports = {
         phone: 4567890123,
         birth: new Date(),
         email: 'emilydavis@example.com',
-        password: 456789,
+        password: encryptPassword('456789'),
         createdAt: new Date(),
           updatedAt: new Date(),
       },
@@ -54,7 +60,7 @@ module.exports = {
         phone: 5678901234,
         birth: new Date(),
         email: 'davidbrown@example.com',
-        password: 567890,
+        password: encryptPassword('567890'),
         createdAt: new Date(),
           updatedAt: new Date(),
       },
@@ -65,7 +71,7 @@ module.exports = {
         phone: 6789012345,
         birth: new Date(),
         email: 'sarahwilson@example.com',
-        password: 678901,
+        password: encryptPassword('678901'),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -76,7 +82,7 @@ module.exports = {
         phone: 7890123456,
         birth: new Date(),
         email: 'jamestaylor@example.com',
-        password: 789012,
+        password: encryptPassword('789012'),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -87,7 +93,7 @@ module.exports = {
         phone: 8901234567,
         birth: new Date(),
         email: 'oliviaanderson@example.com',
-        password: 890123,
+        password: encryptPassword('890123'),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -98,7 +104,7 @@ module.exports = {
         phone: 9012345678,
         birth: new Date(),
         email: 'danielthomas@example.com',
-        password: 901234,
+        password: encryptPassword('901234'),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -109,7 +115,7 @@ module.exports = {
         phone: 1234567891,
         birth: new Date(),
         email: 'sophiamartinez@example.com',
-        password: 123457,
+        password: encryptPassword('123457'),
         createdAt: new Date(),
         updatedAt: new Date(),
       },

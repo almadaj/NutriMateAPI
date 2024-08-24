@@ -1,6 +1,6 @@
 module.exports =  (sequelize, DataTypes) => {
 
-  const User = sequelize.define("users", {
+  const User = sequelize.define("User", {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     profilePhoto: DataTypes.STRING,
@@ -8,6 +8,8 @@ module.exports =  (sequelize, DataTypes) => {
     birth: DataTypes.INTEGER,
     email: DataTypes.INTEGER,
     password: DataTypes.INTEGER,
+  },{
+    tableName: 'users'
   });
 
   User.associate = ({ Meal }) => {

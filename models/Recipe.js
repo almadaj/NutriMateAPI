@@ -1,5 +1,5 @@
 module.exports =  (sequelize, DataTypes) => {
-  const Recipe = sequelize.define("recipes", {
+  const Recipe = sequelize.define("Recipe", {
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     picture: DataTypes.STRING,
@@ -9,11 +9,12 @@ module.exports =  (sequelize, DataTypes) => {
     fat: DataTypes.INTEGER,
     timePrepare: DataTypes.INTEGER,
   }, {
+    tableName: 'recipes',
     timestamps: false // Disable createdAt and updatedAt
   });
 
-  Recipe.associate = ({ Meal, MealRecipes }) => {
-    Recipe.belongsToMany(Meal, { through: MealRecipes });
+  Recipe.associate = ({ Meal, MealRecipe }) => {
+    Recipe.belongsToMany(Meal, { through: MealRecipe });
   }
   return Recipe
 }

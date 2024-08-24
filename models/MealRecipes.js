@@ -1,5 +1,5 @@
 module.exports =  (sequelize, DataTypes) => {
-  const MealRecipes = sequelize.define("mealRecipes", {
+  const MealRecipes = sequelize.define("MealRecipe", {
     mealId: {
       type: DataTypes.INTEGER,
       references: {
@@ -15,8 +15,10 @@ module.exports =  (sequelize, DataTypes) => {
       }
     }
   }, {
+    tableName: 'meal_recipes',
     timestamps: false // Disable createdAt and updatedAt
   });
+  
 
   return MealRecipes;
 }
