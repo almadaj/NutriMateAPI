@@ -16,12 +16,11 @@ module.exports = {
   },
   async listMealByUser(req, res) {
     const { id } = req.params;
-    const meal = await User.findAll({
-      where: {id: id},
-      include:  {
-        model: Meal
-      },
+    const userMeals = await Meal.findAll({
+      where: {
+        userId: id
+      }
     });
-    return res.json(meal);
+    return res.json(userMeals);
   },
 };
