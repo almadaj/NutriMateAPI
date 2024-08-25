@@ -1,4 +1,4 @@
-const {User, Meal} = require("../models/index");
+const {Recipe, Meal} = require("../models/index");
 
 module.exports = {
   async addMeal(req, res) {
@@ -23,4 +23,17 @@ module.exports = {
     });
     return res.json(userMeals);
   },
+  async mealRecipes(req, res) {
+    const { id } = req.params;
+    const mealRecipes = await Meal.findByPk(id, {
+      include: {
+          model: Recipe,
+          through: {
+            attributes: []
+          }
+        }
+  })
+
+  return res.json(mealRecipes.Recipes)
+  }
 };

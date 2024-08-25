@@ -22,5 +22,6 @@ routes.post("/login", UserController.login);
 
 //UserMeals
 routes.get('/user/meals/:id', MealController.listMealByUser)
+routes.get('/user/meals/recipes/:id', MealController.mealRecipes)
 
 module.exports = routes;
