@@ -130,4 +130,5 @@ dist
 .pnp.*
 
 # DB configuration
+database.js
 .env
