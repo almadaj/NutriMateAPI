@@ -16,9 +16,7 @@ Este é um aplicativo de nutrição que ajuda os usuários a gerenciar suas refe
 ##Migrations
 Para rodar as migrations e criar as tabelas no banco de dados, use o comando:
 `npx sequelize-cli db:migrate`
-Seeders
-Para popular o banco de dados com dados iniciais, use o comando:
 
-bash
-Copiar código
+##Seeders
+Para popular o banco de dados com dados iniciais, use o comando:
 `npx sequelize-cli db:seed:all`
