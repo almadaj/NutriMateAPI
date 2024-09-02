@@ -21,6 +21,7 @@ routes.get("/users", UserController.listUsers);
 routes.post("/login", UserController.login);
 
 //UserMeals
+routes.post("/user/meals", MealController.addMeal);
 routes.get("/user/meals/:id", MealController.listMealByUser);
 routes.get("/user/meals/recipes/:id", MealController.mealRecipes);
 

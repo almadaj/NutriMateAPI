@@ -1,14 +1,14 @@
-const {Recipe, Meal} = require("../models/index");
+const { Recipe, Meal } = require("../models/index");
 
 module.exports = {
   async addMeal(req, res) {
-    const { icon, userId, name } = req.body;
-    const recipe = await Meal.create({
+    const { icon, name, userId } = req.body;
+    const meal = await Meal.create({
       icon,
       name,
       userId,
     });
-    return res.json(recipe);
+    return res.status(201).json(meal);
   },
   async getMeal(req, res) {
     const meal = await Meal.findOne({ where: { id: req.params.id } });
@@ -18,8 +18,8 @@ module.exports = {
     const { id } = req.params;
     const userMeals = await Meal.findAll({
       where: {
-        userId: id
-      }
+        userId: id,
+      },
     });
     return res.json(userMeals);
   },
@@ -27,13 +27,13 @@ module.exports = {
     const { id } = req.params;
     const mealRecipes = await Meal.findByPk(id, {
       include: {
-          model: Recipe,
-          through: {
-            attributes: []
-          }
-        }
-  })
+        model: Recipe,
+        through: {
+          attributes: [],
+        },
+      },
+    });
 
-  return res.json(mealRecipes.Recipes)
-  }
+    return res.json(mealRecipes.Recipes);
+  },
 };
