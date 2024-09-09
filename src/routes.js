@@ -24,5 +24,7 @@ routes.post("/login", UserController.login);
 routes.post("/user/meals", MealController.addMeal);
 routes.get("/user/meals/:id", MealController.listMealByUser);
 routes.get("/user/meals/recipes/:id", MealController.mealRecipes);
+routes.post("/user/meals/:id/recipes", MealController.addRecipeToMeal);
+routes.delete("/user/meals/:id/recipes", MealController.removeRecipeFromMeal);
 
 module.exports = routes;

@@ -36,4 +36,43 @@ module.exports = {
 
     return res.json(mealRecipes.Recipes);
   },
+  async addRecipeToMeal(req, res) {
+    try {
+      const mealId = req.params.id;
+      const { recipeId } = req.body;
+      const recipe = await Recipe.findByPk(recipeId);
+      if (!recipe) {
+        return res.status(404).json({ error: "Recipe not found" });
+      }
+      const meal = await Meal.findByPk(mealId);
+      if (!meal) {
+        return res.status(404).json({ error: "Meal not found" });
+      }
+      await meal.addRecipe(recipe);
+      return res.json({ message: "Recipe added to meal", meal });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: error.message });
+    }
+  },
+  async removeRecipeFromMeal(req, res) {
+    try {
+      const mealId = req.params.id;
+      const { recipeId } = req.body;
+
+      const recipe = await Recipe.findByPk(recipeId);
+      if (!recipe) {
+        return res.status(404).json({ error: "Recipe not found" });
+      }
+      const meal = await Meal.findByPk(mealId);
+      if (!meal) {
+        return res.status(404).json({ error: "Meal not found" });
+      }
+      await meal.removeRecipe(recipe);
+      return res.json({ message: "Recipe removed from meal", meal });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: error.message });
+    }
+  },
 };
