@@ -1,24 +1,31 @@
-module.exports =  (sequelize, DataTypes) => {
-  const MealRecipes = sequelize.define("MealRecipe", {
-    mealId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'meals',
-        key: 'id'
+module.exports = (sequelize, DataTypes) => {
+  const MealRecipes = sequelize.define(
+    'MealRecipe',
+    {
+      mealId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'meals',
+          key: 'id'
+        },
+        onDelete: 'CASCADE', // Adiciona a opção onDelete
+        onUpdate: 'CASCADE' // Opcional: permite que a chave estrangeira seja atualizada em cascata
+      },
+      recipeId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'recipes',
+          key: 'id'
+        },
+        onDelete: 'CASCADE', // Adiciona a opção onDelete
+        onUpdate: 'CASCADE' // Opcional: permite que a chave estrangeira seja atualizada em cascata
       }
     },
-    recipeId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'recipes',
-        key: 'id'
-      }
+    {
+      tableName: 'meal_recipes',
+      timestamps: false // Desabilita createdAt e updatedAt
     }
-  }, {
-    tableName: 'meal_recipes',
-    timestamps: false // Disable createdAt and updatedAt
-  });
-  
+  )
 
-  return MealRecipes;
+  return MealRecipes
 }
