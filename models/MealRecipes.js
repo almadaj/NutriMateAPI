@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
           model: 'meals',
           key: 'id'
         },
-        onDelete: 'CASCADE', // Adiciona a opção onDelete
-        onUpdate: 'CASCADE' // Opcional: permite que a chave estrangeira seja atualizada em cascata
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       recipeId: {
         type: DataTypes.INTEGER,
@@ -17,13 +17,13 @@ module.exports = (sequelize, DataTypes) => {
           model: 'recipes',
           key: 'id'
         },
-        onDelete: 'CASCADE', // Adiciona a opção onDelete
-        onUpdate: 'CASCADE' // Opcional: permite que a chave estrangeira seja atualizada em cascata
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       }
     },
     {
       tableName: 'meal_recipes',
-      timestamps: false // Desabilita createdAt e updatedAt
+      timestamps: false
     }
   )
 

@@ -13,18 +13,16 @@ module.exports = {
 
   async removeMeal(req, res) {
     try {
-      const { id, mealId } = req.params // Pegando os parâmetros da rota
+      const { id, mealId } = req.params
 
-      // Remover as receitas associadas à refeição
       await MealRecipes.destroy({
         where: { mealId: Number(mealId) }
       })
 
-      // Tenta deletar a refeição
       const deletedRows = await Meal.destroy({
         where: {
-          id: Number(mealId), // Deletando a refeição específica
-          userId: Number(id) // Assegura que pertence ao usuário correto
+          id: Number(mealId),
+          userId: Number(id)
         }
       })
 
