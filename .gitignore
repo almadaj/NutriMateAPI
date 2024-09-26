@@ -132,3 +132,4 @@ dist
 # DB configuration
 database.js
 .env
+Dockerfile
