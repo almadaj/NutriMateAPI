@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const MealRecipes = sequelize.define(
+  const MealRecipe = sequelize.define(
     'MealRecipe',
     {
       mealId: {
@@ -27,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
-  return MealRecipes
+  return MealRecipe
 }

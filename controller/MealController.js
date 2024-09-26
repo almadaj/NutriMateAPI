@@ -1,4 +1,4 @@
-const { Recipe, Meal, MealRecipes } = require('../models')
+const { Recipe, Meal, MealRecipe } = require('../models')
 
 module.exports = {
   async addMeal(req, res) {
@@ -15,7 +15,7 @@ module.exports = {
     try {
       const { id, mealId } = req.params
 
-      await MealRecipes.destroy({
+      await MealRecipe.destroy({
         where: { mealId: Number(mealId) }
       })
 
